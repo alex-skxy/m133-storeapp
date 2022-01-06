@@ -36,3 +36,17 @@ const getShoppingCart = () => {
 const calculateTotal = products => {
     return 9.0;
 }
+
+(async () => {
+    const productsDiv = document.querySelector('#products');
+    console.log(productsDiv);
+    if (productsDiv) {
+        const products = await getProducts();
+        products.forEach(p => {
+            productsDiv.appendChild(Object.assign(
+                document.createElement('div'),
+                {innerText: p.name})
+            );
+        });
+    }
+})();
