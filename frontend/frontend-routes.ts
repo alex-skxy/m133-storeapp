@@ -36,7 +36,7 @@ router.get('/checkout', async (ctx) => {
 });
 
 
-router.get('/index.js', async (ctx) => {
+router.get('/script.js', async (ctx) => {
     ctx.response.headers.set('Content-Type', 'application/javascript');
     ctx.response.body = await getFile('./frontend/files/script.js');
 });
