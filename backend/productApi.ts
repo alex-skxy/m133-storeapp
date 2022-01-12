@@ -1,6 +1,6 @@
 'use strict';
 import { Router } from 'https://deno.land/x/oak@v9.0.1/mod.ts';
-import  Product from './Product.ts';
+import  Product from './product.ts';
 
 let products: Product[] = [
     {
