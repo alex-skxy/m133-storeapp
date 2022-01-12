@@ -14,8 +14,12 @@ const shoppingCartRouter = new Router();
 shoppingCartRouter.put('/shoppingCart', async (context) => {
     const newItem: shoppingCartEntry = await context.request.body({type: "json"});
     if((await context.cookies.get('shoppingcart')) === undefined){
-        context.cookies.set('shoppingcart', '[]');
+        await context.cookies.set('shoppingcart', '[]');
     }
-    //TODO: add entry
+    let shoppingCart = JSON.parse((await context.cookies.get('shoppingcart')) as string);
+    //TODO: fix can multiple of the same product
+    await shoppingCart.push(shoppingCartEntry);
+    context.cookies.set('shoppingcart', shoppingCart.stringify());
+
 });
 export default shoppingCartRouter;
