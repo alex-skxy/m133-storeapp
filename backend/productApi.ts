@@ -93,6 +93,6 @@ function getProduct(id: string): Product {
 const apiRouter = new Router();
 apiRouter
 .get("/api/product", context => context.response.body = products)
-.get("/api/product/:id", context => context.response.body = getProduct(context.params.id));
+.get("/api/product/:id", context => context.response.body = getProduct(context.params.id as string));
 
 export default apiRouter;
