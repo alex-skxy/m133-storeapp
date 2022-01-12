@@ -1,4 +1,4 @@
-import {Application} from 'https://deno.land/x/oak/mod.ts';
+import {Application} from 'https://deno.land/x/oak@v9.0.1/mod.ts';
 import router from './frontend/frontend-routes.ts';
 import apiRouter from './backend/productApi.ts';
 
