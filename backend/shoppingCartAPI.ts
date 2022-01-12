@@ -1,17 +1,22 @@
 import {Router} from 'https://deno.land/x/oak@v9.0.1/mod.ts';
 
-class shoppingCartEntry {
+class ShoppingCartEntry {
     constructor(public productId: string, public amount: number) {
     }
 }
 
 const shoppingCartRouter = new Router();
 shoppingCartRouter.put('/shoppingCart', async (context) => {
-    const newItem: shoppingCartEntry = await (await context.request.body({type: "json"})).value;
+    const newItem: ShoppingCartEntry = await (await context.request.body({type: "json"})).value;
     let shoppingcart = await context.cookies.get('shoppingcart') || '[]';
-    await context.cookies.set('shoppingcart', JSON.stringify(
-        JSON.parse(shoppingcart).push(newItem)
-    ));
+    const shoppingCart:ShoppingCartEntry[] = JSON.parse(shoppingcart);
+    const entryIndex = shoppingCart.findIndex(entry => entry.productId === newItem.productId);
+    if(entryIndex != -1){
+        shoppingCart[entryIndex].amount += newItem.amount;
+    } else {
+        shoppingCart.push(newItem);
+    }
+    await context.cookies.set('shoppingcart', JSON.stringify(shoppingCart));
 });
 export default shoppingCartRouter;
 
